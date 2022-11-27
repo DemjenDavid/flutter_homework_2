@@ -21,51 +21,48 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}): super(key:key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   String value = "";
 
-  String checkShape(){
+  String checkShape() {
     final int? number = int.tryParse(value);
-    if(number == null){
+    if (number == null) {
       return "Error: input value is not is not valid";
-    }
-    else{
+    } else {
       bool square = false;
       bool triangle = false;
-      if(sqrt(number) % 1 == 0){
+      if (sqrt(number) % 1 == 0) {
         square = true;
       }
       int count = 1;
       int sum = 0;
-      while(number > sum){
+      while (number > sum) {
         sum = sum + count;
         count += 1;
-        if(number==sum){
+        if (number == sum) {
           triangle = true;
           break;
         }
       }
 
-      return "The value is ${(!square)?"not ":""}a square , and the value is ${(!triangle)?"not ":""}a triangle";
+      return "The value is ${(!square) ? "not " : ""}a square , and the value is ${(!triangle) ? "not " : ""}a triangle";
     }
   }
+
   Widget _buildPopupDialog(BuildContext context) {
     return AlertDialog(
-      title: (double.tryParse(value)==null)?const Text("Error"):Text(value)
-      ,
+      title: (double.tryParse(value) == null) ? const Text("Error") : Text(value),
       content: Text(checkShape()),
     );
   }
 
-
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -75,12 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            const Text(
-                "Please input a number to check if it is a square or a triangle",
-                style: TextStyle(fontSize: 20)
-            ),
+            const Text("Please input a number to check if it is a square or a triangle",
+                style: TextStyle(fontSize: 20)),
             TextField(
-              onChanged: (String input){
+              onChanged: (String input) {
                 setState(() {
                   value = input;
                 });
@@ -90,10 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           showDialog(
-              context: context,
-              builder: (BuildContext context)=>_buildPopupDialog(context),
+            context: context,
+            builder: (BuildContext context) => _buildPopupDialog(context),
           );
         },
         tooltip: 'Check Number',
@@ -102,4 +97,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
