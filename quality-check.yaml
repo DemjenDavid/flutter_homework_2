@@ -1,9 +1,0 @@
-on:
-  push:
-
-jobs:
-  quality_assurance:
-    run-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
